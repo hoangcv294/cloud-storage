@@ -1,0 +1,10 @@
+# Compiled files
+*.tfstate
+*.tfstate.backup
+# Module directory
+.terraform/
+*.backup
+*.bak
+.idea/
+.env
+.DS_Store
