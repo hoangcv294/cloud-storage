@@ -95,7 +95,7 @@ resource "aws_eip" "nat_eip" {
 ######################-Create NAT Gateway-#######################
 resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.nat_eip.id
-  subnet_id     = aws_subnet.public_subnet_b.id  # Chọn một public subnet ở cùng availability zone với private subnet
+  subnet_id     = aws_subnet.public_subnet_b.id  
 }
 
 #######################-Allocate Route table with NAT Gateway-#######################
