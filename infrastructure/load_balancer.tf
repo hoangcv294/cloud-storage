@@ -6,7 +6,7 @@ resource "aws_lb_target_group" "cloud_storage_tg" {
   vpc_id   = aws_vpc.cloud_storage_vpc.id
 
   health_check {
-    path                = "/html"
+    path                = "/index.php"
     protocol            = "HTTP"
     port                = "traffic-port"
     healthy_threshold   = 3
