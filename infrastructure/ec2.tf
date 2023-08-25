@@ -24,6 +24,7 @@ resource "aws_instance" "bastion_host" {
   }
 }
 
+####################-Create IP Public Bastion Host-#######################
 resource "aws_eip" "eip" {
   vpc      = true
   instance = aws_instance.bastion_host.id
