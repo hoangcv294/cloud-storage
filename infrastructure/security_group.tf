@@ -31,7 +31,7 @@ resource "aws_security_group" "private_server_sg" {
   }
 }
 
-#######################-Create SG ALB-#######################
+#######################-Create SG Bastion-Host-#######################
 resource "aws_security_group" "bastion_host_sg" {
   name        = "Bastion-Host-SG"
   description = "Method Connection"
@@ -42,15 +42,34 @@ resource "aws_security_group" "bastion_host_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["42.119.201.32/32"]
+    cidr_blocks = ["113.160.224.161/32"]
+    description = "dev-ssh"
+  }
+
+  ingress {
+    from_port   = 3128
+    to_port     = 3128
+    protocol    = "tcp"
+    cidr_blocks = ["113.160.224.161/32"]
+    description = "dev-proxy"
   }
 
   egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+    description = "HTTPS"
   }
+
+  egress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "SSH"
+  }
+
   tags = {
     Name = "Bastion-Host"
   }
@@ -67,14 +86,8 @@ resource "aws_security_group" "cloud_storage_sg" {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["18.141.21.71/32"]
+    description = "bastions-host"
   }
 
   egress {

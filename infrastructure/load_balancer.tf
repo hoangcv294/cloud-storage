@@ -6,14 +6,14 @@ resource "aws_lb_target_group" "cloud_storage_tg" {
   vpc_id   = aws_vpc.cloud_storage_vpc.id
 
   health_check {
-    path                = "/index.php"
+    path                = "/"
     protocol            = "HTTP"
     port                = "traffic-port"
-    healthy_threshold   = 3
-    unhealthy_threshold = 3
+    healthy_threshold   = 5
+    unhealthy_threshold = 2
     timeout             = 4
     interval            = 10
-    matcher             = "200-399"
+    matcher             = "200-499"
   }
 
   tags = {
@@ -38,18 +38,6 @@ resource "aws_lb" "cloud_storage_lb" {
 
   tags = {
     Name = "${var.project}-ALB"
-  }
-}
-
-#######################-Create listener HTTP-#######################
-resource "aws_lb_listener" "http" {
-  load_balancer_arn = aws_lb.cloud_storage_lb.arn
-  port              = 80
-  protocol          = "HTTP"
-
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.cloud_storage_tg.arn
   }
 }
 
