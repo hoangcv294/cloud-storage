@@ -42,7 +42,7 @@ resource "aws_security_group" "bastion_host_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["113.160.224.161/32"]
+    cidr_blocks = ["191.101.211.239/32"]
     description = "dev-ssh"
   }
 
@@ -50,7 +50,7 @@ resource "aws_security_group" "bastion_host_sg" {
     from_port   = 3128
     to_port     = 3128
     protocol    = "tcp"
-    cidr_blocks = ["113.160.224.161/32"]
+    cidr_blocks = ["191.101.211.239/32"]
     description = "dev-proxy"
   }
 
