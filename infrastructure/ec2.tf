@@ -25,6 +25,8 @@ resource "aws_instance" "bastion_host" {
                               sudo yum install squid -y
                               sudo systemctl start squid
                               sudo systemctl enable squid
+                              sudo aws s3 cp s3://ec2.cvh/squid.conf /etc/squid/
+                              sudo systemctl restart squid
                               EOF
   tags = {
     Name = "Bastion-Host-Server"
