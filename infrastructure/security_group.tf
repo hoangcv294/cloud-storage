@@ -86,7 +86,7 @@ resource "aws_security_group" "cloud_storage_sg" {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["18.140.138.193/32"]
+    cidr_blocks = ["54.254.80.9/32"]
     description = "bastions-host"
   }
 
