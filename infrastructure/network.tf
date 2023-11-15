@@ -87,12 +87,12 @@ resource "aws_route_table_association" "private" {
   route_table_id = aws_route_table.private_rtb.id
 }
 
-######################-Create EIP cho NAT Gateway-#######################
+######################-Create EIP fpr NAT Gateway-#######################
 resource "aws_eip" "nat_eip" {
   vpc = true
 }
 
-######################-Create NAT Gateway-#######################
+######################-Relation NAT Gateway vs EIP-#######################
 resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.nat_eip.id
   subnet_id     = aws_subnet.public_subnet_b.id
